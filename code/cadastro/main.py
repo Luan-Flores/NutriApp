@@ -56,7 +56,8 @@ class Main(QtWidgets.QMainWindow):
             "peso": self.ui.linePeso.text(),
             "altura" : self.ui.lineAltura.text(),
             "sexo" : "Feminino" if self.ui.radioF.isChecked() else "Masculino" if self.ui.radioM.isChecked() else "Não informado",
-            "objetivo" : "Perder peso" if self.ui.radioPerderPeso.isChecked() else "Ganhar peso" if self.ui.radioGanharPeso.isChecked() else f"{self.ui.lineObjetivo.text()}" if self.ui.radioOutro.isChecked() else "Nada consta" 
+            "objetivo" : "Perder peso" if self.ui.radioPerderPeso.isChecked() else "Ganhar peso" if self.ui.radioGanharPeso.isChecked() else f"{self.ui.lineObjetivo.text()}" if self.ui.radioOutro.isChecked() else "Nada consta",
+            "plano" : "Básico" if self.ui.radioBasico.isChecked() else "Intermediário" if self.ui.radioIntermediario.isChecked() else "Avançado" if self.ui.radioAvancado.isChecked() else "Não informado" 
         }
 
         file_path, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Cadastrar", "", "Arquivos JSON (*.json)")

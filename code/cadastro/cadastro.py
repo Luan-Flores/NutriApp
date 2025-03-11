@@ -154,7 +154,7 @@ class Ui_MainWindow(object):
         self.label_7.setText("")
         self.label_7.setObjectName("label_7")
         self.lineObjetivo = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineObjetivo.setGeometry(QtCore.QRect(450, 330, 281, 101))
+        self.lineObjetivo.setGeometry(QtCore.QRect(440, 320, 281, 111))
         self.lineObjetivo.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.lineObjetivo.setStyleSheet("border-radius: 10px;\n"
 "border: 6px solid white;\n"

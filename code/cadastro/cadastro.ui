@@ -391,10 +391,10 @@ padding-left: 10px;</string>
    <widget class="QLineEdit" name="lineObjetivo">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>330</y>
+      <x>440</x>
+      <y>320</y>
       <width>281</width>
-      <height>101</height>
+      <height>111</height>
      </rect>
     </property>
     <property name="layoutDirection">
