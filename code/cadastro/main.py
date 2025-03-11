@@ -30,6 +30,8 @@ class Main(QtWidgets.QMainWindow):
         self.grupoSexo.addButton(self.ui.radioM)
         self.grupoSexo.addButton(self.ui.radioF)
 
+        self.campos = [self.ui.lineNome, self.ui.lineIdade, self.ui.lineAltura, self.ui.linePeso, self.ui.lineSenha]
+
 
         
     def clear(self):
@@ -38,6 +40,7 @@ class Main(QtWidgets.QMainWindow):
         self.ui.lineAltura.clear()
         self.ui.linePeso.clear()
         self.ui.lineObjetivo.clear()
+        self.ui.lineSenha.clear()
         self.ui.radioF.setChecked(False)
         self.ui.radioM.setChecked(False)
         self.ui.radioPerderPeso.setChecked(False)
@@ -76,7 +79,37 @@ class Main(QtWidgets.QMainWindow):
             except Exception as e:
                 QtWidgets.QMessageBox.critical(self, "Erro", f"Erro ao realizar o cadastro: {e}")
         else:
-            QtWidgets.QMessageBox.warning(self, "Erro", "Nenhum arquivo selecionado ")
+            data = {
+                "nome" : self.ui.lineNome.text(),
+                "senha" : self.ui.lineSenha.text(),
+                "idade" : self.ui.lineIdade.text(),
+                "peso": self.ui.linePeso.text(),
+                "altura" : self.ui.lineAltura.text(),
+                "sexo" : "Feminino" if self.ui.radioF.isChecked() else "Masculino" if self.ui.radioM.isChecked() else "Não informado",
+                "objetivo" : "Perder peso" if self.ui.radioPerderPeso.isChecked() else "Ganhar peso" if self.ui.radioGanharPeso.isChecked() else f"{self.ui.lineObjetivo.text()}" if self.ui.radioOutro.isChecked() else "Nada consta" 
+            }
+
+            file_path, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Cadastrar", "", "Arquivos JSON (*.json)")
+
+            if file_path:
+                try:
+                    #Verifica se o arquivo termina com '.json'
+                    if not file_path.endswith('.json'):
+                        file_path += '.json'
+                    
+                    #Salva o arquivo JSON no local escolhido
+                    with open(file_path, "w", encoding="utf-8") as file:
+                        json.dump(data, file, ensure_ascii=False, indent=4)
+
+                    QtWidgets.QMessageBox.information(self, "Sucesso", "Cadastro feito com sucesso! ")
+                except Exception as e:
+                    QtWidgets.QMessageBox.critical(self, "Erro", f"Erro ao realizar o cadastro: {e}")
+            else:
+                QtWidgets.QMessageBox.warning(self, "Erro", "Nenhum arquivo selecionado ")
+
+    def login(self):
+        file_path, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Carregar jogo", "", "Arquivos JSON (*.json)")
+        
 
     def carregarJogo(self):
         file_path, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Carregar jogo", "", "Arquivos JSON (*.json)")
