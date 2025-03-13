@@ -1,18 +1,33 @@
-import sys
-import json
+import sys, json
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import QtWidgets, QtCore
-from inicio import Ui_MainWindow
+
+sys.path.append("../cadastro")  # Caminho para a pasta do CADASTRO
+sys.path.append("../listaPacientes")  # Caminho para a pasta de LISTA DE PACIENTES
+
+from mainCad import MainCadastro as telaCadastro
+from inicio import Ui_MainWindow as telaInicio
+from lista import Main as telaLista
+
+
 
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        self.ui = Ui_MainWindow()
+        self.ui = telaInicio()
         self.ui.setupUi(self)
 
-        self.ui.salvarJogo.clicked.connect(self.salvarJogo)
-        self.ui.sair.clicked.connect(self.close)
-        self.ui.carregarJogo.clicked.connect(self.carregarJogo)
-        self.ui.novoJogo.clicked.connect(self.novoJogo)
+        self.ui.cadastrarBtn.clicked.connect(self.openCadastro)
+        self.ui.entrarBtn.clicked.connect(self.openLista)
+
+    def openCadastro(self):
+        self.telaDoCadastro = telaCadastro()  # Cria uma instância da nova janela
+        self.telaDoCadastro.show()
+        # self.close()  # Fecha a janela atual (opcional) 
+    def openLista(self):
+        self.telaLista = telaLista()  # Cria uma instância da nova janela
+        self.telaLista.show()
+        # self.close()  # Fecha a janela atual (opcional) 
         
     def clear(self):
         self.ui.lineNome.clear()

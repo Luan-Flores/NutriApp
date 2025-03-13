@@ -88,7 +88,7 @@
     </property>
     <row>
      <property name="text">
-      <string>Paciente1</string>
+      <string>1</string>
      </property>
     </row>
     <column>
@@ -187,7 +187,7 @@ border-radius: 15px;</string>
      <string>Cadastrar</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="btnEditar">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -212,7 +212,7 @@ border-radius: 15px;</string>
      <string>Editar</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="btnRemover">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -237,7 +237,7 @@ border-radius: 15px;</string>
      <string>Remover</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="btnSalvar">
     <property name="geometry">
      <rect>
       <x>70</x>

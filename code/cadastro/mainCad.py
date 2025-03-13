@@ -3,11 +3,12 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QRadioButton, QButtonGroup
 from cadastro import Ui_MainWindow
 
-class Main(QtWidgets.QMainWindow):
+class MainCadastro(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        # self.ui.pushButton.clicked.connect(self.openSecondScreen)
 
         self.ui.enviar.clicked.connect(self.cadastrar)
         
@@ -86,7 +87,8 @@ class Main(QtWidgets.QMainWindow):
                 "peso": self.ui.linePeso.text(),
                 "altura" : self.ui.lineAltura.text(),
                 "sexo" : "Feminino" if self.ui.radioF.isChecked() else "Masculino" if self.ui.radioM.isChecked() else "Não informado",
-                "objetivo" : "Perder peso" if self.ui.radioPerderPeso.isChecked() else "Ganhar peso" if self.ui.radioGanharPeso.isChecked() else f"{self.ui.lineObjetivo.text()}" if self.ui.radioOutro.isChecked() else "Nada consta" 
+                "objetivo" : "Perder peso" if self.ui.radioPerderPeso.isChecked() else "Ganhar peso" if self.ui.radioGanharPeso.isChecked() else f"{self.ui.lineObjetivo.text()}" if self.ui.radioOutro.isChecked() else "Nada consta",
+                "plano" : "Básico" if self.ui.radioBasico.isChecked() else "Intermediário" if self.ui.radioIntermediario.isChecked() else "Avançado" if self.ui.radioAvancado.isChecked() else "Nada consta" 
             }
 
             file_path, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Cadastrar", "", "Arquivos JSON (*.json)")
@@ -142,6 +144,6 @@ class Main(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    window = Main()
+    window = MainCadastro()
     window.show()
     sys.exit(app.exec_())

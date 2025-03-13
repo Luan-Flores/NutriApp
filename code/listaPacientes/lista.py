@@ -11,9 +11,13 @@ class Main(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.table = self.ui.tabelaLista
-        self.preencher_itens_vazios()
-        self.centralizar()
+        self.btnCadastrar = self.ui.btnCadastrar
+        self.btnEditar = self.ui.btnEditar
+        self.btnRemover = self.ui.btnRemover
+        self.btnSalvar = self.ui.btnSalvar
+        
         self.exibir()
+        self.centralizar()
         # self.imprimir_itens()
 
     def centralizar(self):
@@ -25,27 +29,68 @@ class Main(QtWidgets.QMainWindow):
                 else:
                     print("Centralização impossibilitada")
     
+    def addLinha(self, usuario):
+        count = self.table.rowCount()
+        print(count, " QUANTIDADE DE LINHAAAS")
+        self.table.insertRow(count)
+        self.table.setItem(1, 2, QtWidgets.QTableWidgetItem("Meu Valor"))
+        print(usuario)
+        
     def exibir(self):
         # Caminho relativo ao diretório do script
-        caminho_json = "../../save/luan.json"
         print("Número de linhas:", self.table.rowCount())  # Depuração
         print("Número de colunas:", self.table.columnCount())  # Depuração
 
-        # Abrindo o arquivo JSON
-        # with open(caminho_json, "r", encoding="utf-8") as arquivo:
-        #     dados = json.load(arquivo)
-
-        # print(dados)  # Mostra o conteúdo do JSON
-        # print(dados['nome'])
         caminho = "../../save"
         # Listar os arquivos da pasta de save 
+        arrayDosIguais = []
         arquivos = os.listdir(caminho)
+        i=0
         for arq in arquivos:
-            print(arq)
+            i+=1
+            print(i)
+
+            self.table.insertRow(i)
+            print("Número de linhas:", self.table.rowCount())  # Depuração
+
             # Abrir o arquivo JSON
             with open(f"../../save/{arq}", "r", encoding="utf-8") as arquivo:
-                dados = json.load(arquivo)
-                print(dados, " Dados aí")
+                self.dados = json.load(arquivo)
+                self.colunas = self.table.columnCount()
+
+                    # Iterando sobre as colunas da tabela
+                for col in range(self.colunas):
+                    self.colNome = self.table.horizontalHeaderItem(col).text().lower()
+                    for k in self.dados:
+                        print(k)
+                    # Se o nome das colunas forem iguais, insira o valor
+                        if self.colNome == k:
+                            print(f"coluna tabela {self.colNome}  : coluna json {k}")
+
+                            self.table.setItem(i, col, QtWidgets.QTableWidgetItem(f"{self.dados[k]}"))
+                            arrayDosIguais.append(self.colNome)
+                            
+                        else:
+                            print("Não é igual")
+                            print(f"DIFERENTES !! coluna tabela// {self.colNome}   : coluna json// {k}")
+                        # print(f"VALOR DA COLUNA: {self.table.horizontalHeaderItem(col).text()} : {item.text()}")
+        print(arrayDosIguais)
+
+    # def addInfo(self, colunaJSON, colunaTable):
+    #     self.table.setItem(0, colunaTable, QtWidgets.QTableWidgetItem("VALOR  a"))
+
+                
+                        
+
+
+        # count = self.table.rowCount()
+        # print(count, " QUANTIDADE DE LINHAAAS")
+        # self.table.insertRow(count)
+        # self.table.setItem(1, 2, QtWidgets.QTableWidgetItem("Meu Valor"))
+        # print(usuario)
+
+
+
                 # Daqui para baixo em implementação
                 # Precisa passar os dados dos arquivos JSON para a tabela de Pacientes
 
